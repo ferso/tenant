@@ -1,0 +1,56 @@
+{
+  "name": "tenant",
+  "description": "Simple Framework for Multitenant MongoDB projects",
+  "version": "0.2",
+  "author": {
+    "name": "Fernando Soto"
+  },
+  "homepage": "https://github.com/ferso/tenantjs",
+  "bugs": {
+    "url": "https://github.com/ferso/tenantjs/issues"
+  },
+  "keywords": [
+    "mongodb",
+    "terminal",
+    "colors"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ferso/tenantjs.js.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/basic-test.js && node tests/safe-test.js"
+  },
+  "engines": {
+    "node": ">=0.1.90"
+  },
+  "main": "lib",
+  "files": [
+    "examples",
+    "lib",
+    "LICENSE",
+    "safe.js",
+    "themes"
+  ],
+  "gitHead": "8bf2ad9fa695dcb30b7e9fd83691b139fd6655c4",
+  "_id": "colors@1.1.2",
+  "_shasum": "168a4701756b6a7f51a12ce0c97bfa28c084ed63",
+  "_from": "colors@*",
+  "_npmVersion": "2.1.8",
+  "_nodeVersion": "0.11.13",
+  "_npmUser": {
+    "name": "marak",
+    "email": "marak.squires@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "ferso",
+      "email": "erickfernando@gmail.com"
+    },
+    {
+      "name": "Saraí",
+      "email": "sleon90@gmail.com"
+    }
+  ] 
+}
