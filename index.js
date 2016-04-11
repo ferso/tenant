@@ -23,7 +23,7 @@ const _ 			= require("underscore");
 //Create APP
 const app    	= express();  
 const http      = require('http').Server(app);
-const io        = require('socket.io')(http);
+const io        = require('socket.io')(http); 
 	  
 // Routes 
 // ----------------------------------------------
@@ -134,6 +134,8 @@ app.use(function(req, res, next) {
 });
 
 global.tenant  		= { config:local, io:io };
+
+
 
 // Run server
 // ----------------------------------------------
