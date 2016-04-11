@@ -1,55 +1,7 @@
 {
   "name": "Tenantjs",
   "description": "Lightweight MultiTenant Framework for SQL/NoSQL projects",
-  "version": "1.0.2",
-  "author": {
-    "name": "Fernando Soto"
-  },
-  "homepage": "https://github.com/ferso/tenantjs",
-  "bugs": {
-    "url": "https://github.com/ferso/tenantjs/issues"
-  },
-  "keywords": [
-    "mongodb",
-    "terminal",
-    "colors"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/ferso/tenantjs.js.git"
-  },
-  "license": "MIT",
-  "scripts": {
-    "test": "node tests/basic-test.js && node tests/safe-test.js"
-  },
-  "engines": {
-    "node": ">=0.1.90"
-  },
-  "main": "lib",
-  "files": [
-    "examples",
-    "lib",
-    "LICENSE",
-    "safe.js",
-    "themes"
-  ], 
-  "maintainers": [
-    {
-      "name": "ferso",
-      "email": "erickfernando@gmail.com"
-    },
-    {
-      "name": "Saraí",
-      "email": "sleon90@gmail.com"
-    }
-  ] 
-}
-
-
-{
-  "name": "Tenantjs",
-  "description": "Lightweight MultiTenant Framework for SQL/NoSQL projects",
-  "version": "4.13.4",
+  "version": "0.2.1",
   "author": {
     "name": "Fernando Soto",
     "email": "erickfernando@gmail.com"
@@ -63,7 +15,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/expressjs/express"
+    "url": "https://github.com/ferso/tenantjs.git"
   },
   "keywords": [
    "mongodb",
