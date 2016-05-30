@@ -23,11 +23,11 @@ const _ 			= require("underscore");
 //Create APP
 const app    	= express();  
 const http      = require('http').Server(app);
-const io        = require('socket.io')(http); 
+const io        = require('socket.io')(http);
 	  
 // Routes 
 // ----------------------------------------------
-const model  		= require('./lib/model.js'); 
+const model  		= require('./lib/mysql.js'); 
 const routes 		= require( join(fs.realpathSync('config/',{}), '/routes.js'));
 const local 		= require( join(fs.realpathSync('config/',{}), '/local.js'));
 const sessconf 		= require( join(fs.realpathSync('config/',{}), '/sessions.js')).session;
@@ -43,21 +43,9 @@ const socketport	= local.socketport || 9992;
 var jsonParser = bodyParser.json()
 
 // Use the body-parser package in our application
-app.use(bodyParser.json({limit: '100mb'}));
-app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
-
-// Allow Cors  	
-app.use(cors());  
-
-// var allowCrossDomain = function(req, res, next) {
-// 	    res.header('Access-Control-Allow-Origin', '*');
-//     	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     	res.header('Access-Control-Allow-Headers', 'Content-Type');
-// 	    next();
-// 	}
-
-// app.use(allowCrossDomain);
-
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Auth Middleware
 // ----------------------------------------------
@@ -86,7 +74,7 @@ app.use(function (req, res, next) {
 	}else{ 
 		next();
 	}
-})
+});
 
 // Dynamically include routes (Controller)
 // ----------------------------------------------
@@ -112,18 +100,12 @@ fs.readdirSync(fs.realpathSync('controllers',{})).forEach(function (file) {
 fs.readdirSync(fs.realpathSync('models',{})).forEach(function(file,i) { 
       var name            = file.replace('.js','') ;
       var modelname       = name.charAt(0).toUpperCase() + name.slice(1);
-
-      // console.log( join(fs.realpathSync('models',{}),'/', file) );
       //require file
-      this[modelname] = require(join(fs.realpathSync('models',{}),'/', file));               
-      
+      this[modelname] = require(join(fs.realpathSync('models',{}),'/', file));                    
       //attributes
-      this[modelname]._collection = name;
-
+      this[modelname].collection = name;
       //extendig model 
-      this[modelname] = _.extend({}, model, this[modelname]);
-
-      
+      this[modelname] = _.extend({}, model, this[modelname]);      
 });
 
 
@@ -133,35 +115,21 @@ app.use(function(req, res, next) {
   res.status(400).json({status:400,msg:'Bad Request'});      
 });
 
-global.tenant  		= { config:local, io:io };
-
-
+global.tenant  		= { config:local, io:io, app:app };
 
 // Run server
 // ----------------------------------------------
-module.exports.run = function(){
-
-	
+module.exports.run = function(options){
 	// Allow Cors  	
 	app.use(cors());  
-
 	// Enable Trust Proxy
 	app.enable('trust proxy', 1);
 
-	// // Run HTTP Server
-	// // ---------------------------------
-	// app.listen(port, function () {
-	//   //console.log( '========================================================='.strikethrough.green);
-	//   console.log( (' Tenant Services running at port '+port + ' ').bgGreen.black);
-	//   console.log( ('--------------------------------------------------').gray);
-	// });
-
 	// Run Socket Server
-	// ---------------------------------
 	http.listen(port, function () {
-	  //console.log( '========================================================='.strikethrough.green);
+	 // set port	
+	 // var port = typeof options === 'undefined' ? port : options.port;
 	  console.log( (' Tenant Socket Services running at port '+port + ' ').bgGreen.black);
 	  console.log( ('--------------------------------------------------').gray);
 	});
-
 }
