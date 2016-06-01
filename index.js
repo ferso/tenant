@@ -34,7 +34,7 @@ const sessconf 		= require( join(fs.realpathSync('config/',{}), '/sessions.js'))
 const auth 			= sessconf.auth;
 const polices 		= require('./lib/polices.js');
 
-// Configuration 
+// Configuration
 // ----------------------------------------------
 const port    		= local.port || 9991;
 const socketport	= local.socketport || 9992;
@@ -42,9 +42,9 @@ const socketport	= local.socketport || 9992;
 // Create application/json parser
 var jsonParser = bodyParser.json()
 
+var upload_limit = typeof(local.upload_limit) == 'undefined' ? '50mb' : local.upload_limit;
 // Use the body-parser package in our application
-// app.use(bodyParser({limit: '50mb'}));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: upload_limit }));
 // app.use(bodyParser.json({limit: '50mb'}));
 
 
