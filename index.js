@@ -1,3 +1,6 @@
+
+"use strict";
+
 const colors  	 	= require('colors');
 const express 	 	= require('express');
 const bodyParser 	= require('body-parser');
@@ -14,12 +17,19 @@ const eh 			= require('errorhandler');
 const multer 		= require('multer');
 const _ 			= require("underscore");
 const osTmpdir 		= require('os-tmpdir');
+const dmn      		= require('domain').create(); 
 
-"use strict";
+
+
 
 process.on('uncaughtException', function (err) {
   console.log(err);
-})
+});
+
+dmn.on('error', function(error,r){
+	console.log(error);
+});
+
 
 //Create APP
 const app    	= express();  
@@ -136,10 +146,10 @@ global.tenant  		= { config:local, io:io, app:app };
 module.exports.run = function(options){
 	
 	// Run Socket Server
-	http.listen(port, function () {
+	http.listen(port, dmn.bind(function () {
 	 // set port	
 	 // var port = typeof options === 'undefined' ? port : options.port;
 	  console.log( (' Tenant Socket Services running at port '+port + ' ').bgGreen.black);
 	  console.log( ('--------------------------------------------------').gray);
-	});
+	}));
 }
