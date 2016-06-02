@@ -1,6 +1,3 @@
-
-"use strict";
-
 const colors  	 	= require('colors');
 const express 	 	= require('express');
 const bodyParser 	= require('body-parser');
@@ -20,7 +17,7 @@ const osTmpdir 		= require('os-tmpdir');
 const dmn      		= require('domain').create(); 
 
 
-
+"use strict";
 
 process.on('uncaughtException', function (err) {
   console.log(err);
