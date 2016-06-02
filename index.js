@@ -8,11 +8,6 @@ const router 		= express.Router()
 const extend 	 	= require('util')._extend;
 const join   	 	= require('path').join;
 const session 		= require('express-session');
-const Db            = require('mongodb').Db;
-const MongoClient   = require('mongodb').MongoClient;
-const ObjectID      = require('mongodb').ObjectID;
-const ReplSet       = require('mongodb').ReplSet;
-const Server        = require('mongodb').Server;
 const url 			= require('url');
 const mo 			= require('method-override');
 const eh 			= require('errorhandler');
@@ -34,14 +29,13 @@ const io        = require('socket.io')(http);
 // Routes 
 // ----------------------------------------------
 const connections 	= require( join(fs.realpathSync('config/',{}), '/connections.js'));
+const model  		= require('./lib/'.concat(connections[connections.default].adapter,'.js')); 
 const routes 		= require( join(fs.realpathSync('config/',{}), '/routes.js'));
 const local 		= require( join(fs.realpathSync('config/',{}), '/local.js'));
 const sessconf 		= require( join(fs.realpathSync('config/',{}), '/sessions.js')).session;
 const auth 			= sessconf.auth;
 const polices 		= require('./lib/polices.js');
-const model  		= require('./lib/'.concat(connections[connections.default].adapter,'.js')); 
 
-console.log(model);
 
 // Configuration
 // ----------------------------------------------
