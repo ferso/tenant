@@ -16,6 +16,7 @@ const Server        = require('mongodb').Server;
 const url 			= require('url');
 const mo 			= require('method-override');
 const eh 			= require('errorhandler');
+const multer 		= require('multer');
 const _ 			= require("underscore");
 
 "use strict";
@@ -43,10 +44,12 @@ const socketport	= local.socketport || 9992;
 app.use(bodyParser.json({limit: '50mb'}))
 //upload limit
 var upload_limit = typeof(local.upload_limit) == 'undefined' ? '50mb' : local.upload_limit;
+
 // Use the body-parser package in our application
 app.use(bodyParser.urlencoded({ extended: true, limit: upload_limit, parameterLimit:50000 }));
-//json parser
 
+//multer for files
+app.use(multer());
 
 
 // Auth Middleware
