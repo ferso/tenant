@@ -49,8 +49,7 @@ var upload_limit = typeof(local.upload_limit) == 'undefined' ? '50mb' : local.up
 app.use(bodyParser.urlencoded({ extended: true, limit: upload_limit, parameterLimit:50000 }));
 
 //multer for files
-app.use(multer());
-
+app.use(multer({dest:__dirname+'/file/uploads/'}).any());
 
 // Auth Middleware
 // ----------------------------------------------
