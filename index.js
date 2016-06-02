@@ -22,6 +22,10 @@ const osTmpdir 		= require('os-tmpdir');
 
 "use strict";
 
+process.on('uncaughtException', function (err) {
+  console.log(err);
+})
+
 //Create APP
 const app    	= express();  
 const http      = require('http').Server(app);
@@ -51,6 +55,14 @@ app.use(bodyParser.urlencoded({ extended: true, limit: upload_limit, parameterLi
 
 //multer for files
 app.use(multer({dest:osTmpdir()}).any());
+
+
+// Allow Cors  	
+app.use(cors());
+
+// Enable Trust Proxy
+app.enable('trust proxy', 1);
+
 
 // Auth Middleware
 // ----------------------------------------------
@@ -125,11 +137,7 @@ global.tenant  		= { config:local, io:io, app:app };
 // Run server
 // ----------------------------------------------
 module.exports.run = function(options){
-	// Allow Cors  	
-	app.use(cors());  
-	// Enable Trust Proxy
-	app.enable('trust proxy', 1);
-
+	
 	// Run Socket Server
 	http.listen(port, function () {
 	 // set port	
