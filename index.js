@@ -34,6 +34,7 @@ const io        = require('socket.io')(http);
 // Routes 
 // ----------------------------------------------
 const model  		= require('./lib/mysql.js'); 
+const connections 	= require( join(fs.realpathSync('config/',{}), '/connections.js'));
 const routes 		= require( join(fs.realpathSync('config/',{}), '/routes.js'));
 const local 		= require( join(fs.realpathSync('config/',{}), '/local.js'));
 const sessconf 		= require( join(fs.realpathSync('config/',{}), '/sessions.js')).session;
