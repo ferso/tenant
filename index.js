@@ -124,7 +124,7 @@ fs.readdirSync(fs.realpathSync('models',{})).forEach(function(file,i) {
       //require file
       this[modelname] = require(join(fs.realpathSync('models',{}),'/', file));                    
       //attributes
-      this[modelname].collection = name;
+      this[modelname].collection = name.toLowerCase();
       //extendig model 
       this[modelname] = _.extend({}, model, this[modelname]);      
 });
